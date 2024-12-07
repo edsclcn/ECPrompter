@@ -149,9 +149,8 @@ function sendPrompt(tabId, textId) {
     const text = document.getElementById(`textarea-${tabId}-${textId}`).value;
     const title = `window-${tabId}`;
     localStorage.setItem(title, text);
-    let prompter = window.open(`prompter/content.html?title=${encodeURIComponent(title)}`, title, 'width=800,height=450');
-    prompter.focus();
-    textNum[tabId.toString()][1] = prompter;
+    textNum[tabId.toString()][1] = window.open(`prompter/content.html?title=${encodeURIComponent(title)}`, title, 'width=800,height=450');
+    textNum[tabId.toString()][1].focus();
 }
 
 document.getElementById('add-tab-btn').addEventListener('click', addTab);
@@ -163,4 +162,7 @@ document.getElementById('tabs-list').addEventListener('click', (e) => {
 
 window.onload = () => addTab();
 
-window.addEventListener('beforeunload', function (event) { event.preventDefault(); event.returnValue = ''; });
+window.addEventListener('beforeunload', function (event) { 
+    event.preventDefault(); 
+    event.returnValue = ''; 
+});
