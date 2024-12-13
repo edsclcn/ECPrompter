@@ -1,7 +1,6 @@
 let tabCount = 0; 
 let activeTabs = []; // List of currently open tabs (tracks their IDs)
 let textNum = {};
-let lastSelectedTextarea = null; 
 
 function addTab() {
     if (activeTabs.length >= 10) {
@@ -11,7 +10,7 @@ function addTab() {
 
     tabCount++;
     activeTabs.push(tabCount);
-    textNum[tabCount.toString()] = [0, null];
+    textNum[tabCount.toString()] = [0, null, null]; //Area count, window, active text area
 
     const tab = document.createElement('li');
     tab.classList.add('tab');
@@ -80,9 +79,9 @@ function createTextareasRow(container, tabId) {
         const promptButton = document.createElement('button');
         promptButton.textContent = 'PROMPT';
         promptButton.onclick = () => {
-            if (lastSelectedTextarea) lastSelectedTextarea.style.border = '1px solid white'; 
+            if (textNum[tabId.toString()][2]) textNum[tabId.toString()][2].style.border = '1px solid white'; 
             textarea.style.border = '2px solid red';
-            lastSelectedTextarea = textarea;
+            textNum[tabId.toString()][2] = textarea;
             
             sendPrompt(tabId, textId);
         };
@@ -133,7 +132,7 @@ function handleTabClose(tab) {
 
     activeTabs = activeTabs.filter((id) => id !== tabId);
 
-    delete textNum[tabCount.toString()];
+    delete textNum[tabId.toString()];
 
     if (tab.classList.contains('active')) {
         if (activeTabs.length > 0) showTabContent(activeTabs[activeTabs.length - 1]);
@@ -165,4 +164,5 @@ window.onload = () => addTab();
 window.addEventListener('beforeunload', function (event) { 
     event.preventDefault(); 
     event.returnValue = ''; 
+    //add clear tabcount iterate
 });
