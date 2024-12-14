@@ -1,3 +1,6 @@
+const AREA_PER_ROW = 5;                                     // Number of textarea tags per row
+const SESSION_ID = Math.random().toString().substring(2);   // Random number to avoid data overlap with different sessions
+
 let tabCount = 0; 
 let activeTabs = []; // List of currently open tabs (tracks their IDs)
 let textNum = {};
@@ -63,8 +66,9 @@ function createTextareasRow(container, tabId) {
     const rowContainer = document.createElement('div');
     rowContainer.classList.add('textareas-row');
     rowContainer.style.position = 'relative';
+    const current = textNum[tabId.toString()][0];
 
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= AREA_PER_ROW; i++) {
         const textareaItem = document.createElement('div');
         textareaItem.classList.add('textarea-item');
 
@@ -82,8 +86,11 @@ function createTextareasRow(container, tabId) {
             if (textNum[tabId.toString()][2]) textNum[tabId.toString()][2].style.border = '1px solid white'; 
             textarea.style.border = '2px solid red';
             textNum[tabId.toString()][2] = textarea;
+
+            //get button, get parent element (buttonContainer), get parent element (textAreaItem), get textarea in element, get the first index element, get the id of the element, split string with hyphen, get the third index (the id) 
+            const id = promptButton.parentElement.parentElement.getElementsByTagName("textarea")[0].id.split("-")[2];
             
-            sendPrompt(tabId, textId);
+            sendPrompt(tabId, parseInt(id));
         };
 
         const resetButton = document.createElement('button');
@@ -105,6 +112,7 @@ function createTextareasRow(container, tabId) {
     removeSetButton.innerHTML = '×';
     removeSetButton.onclick = function () {
         rowContainer.remove();
+        rearrangeTextAreas(tabId);
     };
 
     const buttonWrapper = document.createElement('div');
@@ -122,6 +130,20 @@ function showTabContent(tabId) {
     if (activeTab && activeContent) {
         activeTab.classList.add('active');
         activeContent.style.display = 'block';
+    }
+}
+
+function rearrangeTextAreas(tabId) {
+    const tab = document.getElementById(`tab-${tabId}`);
+    const textareas = tab.querySelectorAll('textarea');
+    const newTextAreaCount = textareas.length;
+    textNum[tabId.toString()][0] = newTextAreaCount;
+
+    let newTextId = 0;
+    for (let textarea of textareas) {
+        newTextId++;
+        textarea.id = `textarea-${tabId}-${newTextId}`;
+        textarea.placeholder = `Text Area #${newTextId}`;
     }
 }
 
@@ -146,7 +168,7 @@ function renameTab(tab) {
 
 function sendPrompt(tabId, textId) {
     const text = document.getElementById(`textarea-${tabId}-${textId}`).value;
-    const title = `window-${tabId}`;
+    const title = `${SESSION_ID}-${tabId}`;
     localStorage.setItem(title, text);
     textNum[tabId.toString()][1] = window.open(`prompter/content.html?title=${encodeURIComponent(title)}`, title, 'width=800,height=450');
     textNum[tabId.toString()][1].focus();
@@ -162,7 +184,9 @@ document.getElementById('tabs-list').addEventListener('click', (e) => {
 window.onload = () => addTab();
 
 window.addEventListener('beforeunload', function (event) { 
-    event.preventDefault(); 
-    event.returnValue = ''; 
-    //add clear tabcount iterate
-});
+    for (let i = 1; i <= tabCount; i++){
+        this.localStorage.removeItem(`${SESSION_ID}-${i}`);
+    }
+    
+    //event.preventDefault(); event.returnValue = ''; 
+    });
