@@ -68,6 +68,12 @@ body {
     user-select: none;
 }
 
+.tab span:hover {
+    align-self: center;
+    font-weight: bolder;
+    color: #f1948a;
+}
+
 .tab:hover {
     background-color: #444;
 }
@@ -98,22 +104,25 @@ body {
     cursor: pointer;
 }
 
-#copy-line-up {
+#button-div {
     user-select: none;
     margin-left: 20px;
-    background-color: #306030;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-    position: absolute; /* Makes the button float to the right */
-    right: 10px; /* Adjusts the right margin to have space from the right edge */
-    top: 50%; /* Vertically center the button */
-    transform: translateY(-50%); /* To exactly center the button vertically */
+    position: absolute; 
+    right: 20px; 
+    top: 50%; 
+    transform: translateY(-50%); 
 }
 
-
+.port-button {
+    user-select: none;
+    background-color: #306030;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
 
 /* Main Content */
 .main-content {

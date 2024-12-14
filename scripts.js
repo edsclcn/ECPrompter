@@ -1,15 +1,15 @@
 const AREA_PER_ROW = 5;                                     // Number of textarea tags per row
 const SESSION_ID = Math.random().toString().substring(2);   // Random number to avoid data overlap with different sessions
 
-let tabCount = 0; 
+let tabCount = 0;
 let activeTabs = []; // List of currently open tabs (tracks their IDs)
 let textNum = {};
 
 function addTab() {
     if (activeTabs.length >= 10) {
         alert("Maximum 10 tabs allowed.");
-        return;
-    } 
+        return 0;
+    }
 
     tabCount++;
     activeTabs.push(tabCount);
@@ -17,7 +17,7 @@ function addTab() {
 
     const tab = document.createElement('li');
     tab.classList.add('tab');
-    
+
     tab.textContent = `Tab ${tabCount}`;
     tab.dataset.tabId = tabCount;
 
@@ -35,6 +35,7 @@ function addTab() {
     document.getElementById('tabs-list').appendChild(tab);
     addTabContent(tabCount);
     showTabContent(tabCount);
+    return tabCount;
 }
 
 function addTabContent(tabId) {
@@ -83,13 +84,13 @@ function createTextareasRow(container, tabId) {
         const promptButton = document.createElement('button');
         promptButton.textContent = 'PROMPT';
         promptButton.onclick = () => {
-            if (textNum[tabId.toString()][2]) textNum[tabId.toString()][2].style.border = '1px solid white'; 
+            if (textNum[tabId.toString()][2]) textNum[tabId.toString()][2].style.border = '1px solid white';
             textarea.style.border = '2px solid red';
             textNum[tabId.toString()][2] = textarea;
 
             //get button, get parent element (buttonContainer), get parent element (textAreaItem), get textarea in element, get the first index element, get the id of the element, split string with hyphen, get the third index (the id) 
             const id = promptButton.parentElement.parentElement.getElementsByTagName("textarea")[0].id.split("-")[2];
-            
+
             sendPrompt(tabId, parseInt(id));
         };
 
@@ -183,10 +184,10 @@ document.getElementById('tabs-list').addEventListener('click', (e) => {
 
 window.onload = () => addTab();
 
-window.addEventListener('beforeunload', function (event) { 
-    for (let i = 1; i <= tabCount; i++){
+window.addEventListener('beforeunload', function (event) {
+    for (let i = 1; i <= tabCount; i++) {
         this.localStorage.removeItem(`${SESSION_ID}-${i}`);
     }
-    
+
     //event.preventDefault(); event.returnValue = ''; 
-    });
+});
