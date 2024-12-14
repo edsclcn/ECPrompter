@@ -171,7 +171,7 @@ function sendPrompt(tabId, textId) {
     const text = document.getElementById(`textarea-${tabId}-${textId}`).value;
     const title = `${SESSION_ID}-${tabId}`;
     localStorage.setItem(title, text);
-    textNum[tabId.toString()][1] = window.open(`prompter/content.html?title=${encodeURIComponent(title)}`, title, 'width=800,height=450');
+    textNum[tabId.toString()][1] = window.open(`../prompter.html?title=${encodeURIComponent(title)}`, title, 'width=800,height=450');
     textNum[tabId.toString()][1].focus();
 }
 

@@ -107,10 +107,10 @@ body {
 #button-div {
     user-select: none;
     margin-left: 20px;
-    position: absolute; 
-    right: 20px; 
-    top: 50%; 
-    transform: translateY(-50%); 
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 .port-button {
@@ -170,7 +170,7 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
+
 }
 
 .textarea-item textarea {
@@ -182,8 +182,8 @@ body {
     border-radius: 5px;
     background-color: #333;
     color: #fff;
-    resize: none; /* Disable resizing */
-    line-height: 1.5; /* Ensure there is some space for the lines */
+    resize: none;
+    line-height: 1.5;
 }
 
 /* Buttons */
@@ -227,14 +227,8 @@ body {
     cursor: pointer;
     display: block;
     margin-left: auto;
-    margin-right: auto; /* This centers the button */
+    margin-right: auto;
 }
-
-
-/*.textarea-item textarea::first-line {
-    background-color: rgba(255, 255, 0, 0.425);
-    color: black;
-}*/
 
 
 /* Dark Mode Scrollbars */
@@ -263,37 +257,30 @@ body {
     scrollbar-width: thin;
 }
 
-/* Position and style for the remove button (X) */
 .remove-set-btn-wrapper {
-    position: absolute;  /* Ensure it stays at the top-right of the set */
+    position: absolute;
     top: 0;
-    right: -40px;  /* Adjusted to move the button more to the right */
+    right: -40px;
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
-    z-index: 1; /* Ensure the button is above the textareas */
+    z-index: 1;
 }
 
 .remove-set-btn {
     user-select: none;
     background-color: #B00707;
-    /*border: none;
-    color: white;
-    /*
-    border-radius: 20%; /* Circular button */
     width: 30px;
     height: 30px;
     border: none;
     color: white;
     border-radius: 7px;
-    /*box-shadow: 0px 0px 10px 3px #060D18;*/
     font-size: 15px;
     cursor: pointer;
-    z-index: 2; /* Ensure the x button stays on top */
+    z-index: 2;
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;
