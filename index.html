@@ -18,10 +18,10 @@
                 <h2 id="name">EC Prompter</h2>
                 <nav>
                     <ul id="tabs-list"></ul>
-                    <button id="add-tab-btn">+</button>
+                    <button id="add-tab-btn" title="Add new tab">+</button>
                     <div id="button-div">
-                        <button class="port-button">Export</button>
-                        <button class="port-button">Import</button>
+                        <button class="port-button" onclick="exportLineup()" title="Export tab to Clipboard">Export</button>
+                        <button class="port-button" onclick="importLineup()" title="Import Clipboard to tab">Import</button>
                     </div>
                 </nav>
             </div>
@@ -34,6 +34,7 @@
         </main>
     </div>
     <script src="js/index.js"></script>
+    <script src="js/port.js"></script>
 </body>
 
 </html>

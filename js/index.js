@@ -1,5 +1,5 @@
 const AREA_PER_ROW = 5;                                     // Number of textarea tags per row
-const SESSION_ID = Math.random().toString().substring(2);   // Random number to avoid data overlap with different sessions
+const SESSION_ID = Math.random().toString().substring(2);   // Random number to avoid overlap with different sessions
 
 let tabCount = 0;
 let activeTabs = []; // List of currently open tabs (tracks their IDs)
@@ -51,13 +51,14 @@ function addTabContent(tabId) {
 
     const addSetButton = document.createElement('button');
     addSetButton.classList.add('add-set-btn');
+    addSetButton.id = `add-set-${tabId}`;
+    addSetButton.title = "Add new set";
 
     addSetButton.innerHTML = '<i class="fa-solid fa-boxes-stacked"></i> +';
     addSetButton.onclick = function () {
         createTextareasRow(container, tabId);
     };
 
-    container.appendChild(addSetButton);
     content.appendChild(container);
     content.appendChild(addSetButton);
     tabContent.appendChild(content);
@@ -67,7 +68,6 @@ function createTextareasRow(container, tabId) {
     const rowContainer = document.createElement('div');
     rowContainer.classList.add('textareas-row');
     rowContainer.style.position = 'relative';
-    const current = textNum[tabId.toString()][0];
 
     for (let i = 1; i <= AREA_PER_ROW; i++) {
         const textareaItem = document.createElement('div');
@@ -77,12 +77,18 @@ function createTextareasRow(container, tabId) {
         const textarea = document.createElement('textarea');
         textarea.id = `textarea-${tabId}-${textId}`;
         textarea.placeholder = `Text Area #${textId}`;
+        textarea.addEventListener('paste', () => {
+            setTimeout(() => {
+                textarea.scrollTop = 0;
+            }, 0);
+        });
 
         const buttonContainer = document.createElement('div');
         buttonContainer.classList.add('button-container');
 
         const promptButton = document.createElement('button');
         promptButton.textContent = 'PROMPT';
+        promptButton.title = 'Send to Prompter';
         promptButton.onclick = () => {
             if (textNum[tabId.toString()][2]) textNum[tabId.toString()][2].style.border = '1px solid white';
             textarea.style.border = '2px solid red';
@@ -97,6 +103,7 @@ function createTextareasRow(container, tabId) {
         const resetButton = document.createElement('button');
         resetButton.classList.add('reset-scroll-btn');
         resetButton.innerHTML = '<i class="fa-solid fa-circle-up"></i>';
+        resetButton.title = 'Scroll to top';
         resetButton.onclick = () => (textarea.scrollTop = 0);
 
         buttonContainer.appendChild(promptButton);
@@ -111,6 +118,7 @@ function createTextareasRow(container, tabId) {
     const removeSetButton = document.createElement('button');
     removeSetButton.classList.add('remove-set-btn');
     removeSetButton.innerHTML = '×';
+    removeSetButton.title = 'Remove set';
     removeSetButton.onclick = function () {
         rowContainer.remove();
         rearrangeTextAreas(tabId);
@@ -190,4 +198,4 @@ window.addEventListener('beforeunload', function (event) {
     }
 
     //event.preventDefault(); event.returnValue = ''; 
-});
+}); 
