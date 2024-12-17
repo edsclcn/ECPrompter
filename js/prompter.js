@@ -25,6 +25,10 @@ let fontSize = sessionStorage.getItem('fontSize');
 if (fontSize) prompterContent.style.fontSize = fontSize + 'px';
 else prompterContent.style.fontSize = '100px';
 
+//Prompter width
+let prompterWidth = sessionStorage.getItem('prompterWidth');
+if (prompterWidth) prompterContent.style.width = prompterWidth + "px";
+
 //Scrolling
 prompterContent.style.top = "0px";
 let scrollingNow = false;
@@ -112,7 +116,7 @@ var keydownListener = function (event) {
         case 'Digit4':
             event.preventDefault();
             scrollSpeed = 2;
-            break;    
+            break;
         case 'Digit5':
             event.preventDefault();
             scrollSpeed = 2.5;
@@ -179,13 +183,19 @@ var keydownListener = function (event) {
             break;
         case 'Minus':
             event.preventDefault();
-            var currentWidth = parseInt(window.getComputedStyle(prompterContent).width, 10);
-            if (currentWidth - 50 >= screen.availWidth / 3) prompterContent.style.width = (currentWidth - 50) + "px";
+            var currentWidth = parseInt(window.getComputedStyle(prompterContent).width, 10) - 50;
+            if (currentWidth >= screen.availWidth / 3) {
+                prompterContent.style.width = currentWidth + "px";
+                sessionStorage.setItem('prompterWidth', currentWidth);
+            }
             break;
         case 'Equal':
             event.preventDefault();
-            var currentWidth = parseInt(window.getComputedStyle(prompterContent).width, 10);
-            if (currentWidth + 50 <= screen.availWidth) prompterContent.style.width = (currentWidth + 50) + "px";
+            var currentWidth = parseInt(window.getComputedStyle(prompterContent).width, 10) + 50;
+            if (currentWidth <= screen.availWidth) {
+                prompterContent.style.width = currentWidth + "px";
+                sessionStorage.setItem('prompterWidth', currentWidth);
+            }
             break;
         case 'KeyT':
             event.preventDefault();
@@ -268,7 +278,7 @@ var wheelListener = function (event) {
 document.addEventListener('wheel', wheelListener);
 
 //Double click function
-function isDoubleClick(type){
+function isDoubleClick(type) {
     let currentTime = Date.now();
     if (currentTime - lastPressed[type] < DOUBLE_CLICK_INTERVAL) {
         lastPressed[type] = 0;
