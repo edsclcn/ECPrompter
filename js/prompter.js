@@ -1,4 +1,5 @@
 const DOUBLE_CLICK_INTERVAL = 500;
+const TOP_SPEED = 6.5;
 
 const prompterContainer = document.getElementById("bgPrompter");
 const prompterContent = document.getElementById("prompter-content");
@@ -89,6 +90,7 @@ function exitFullscreen() {
     else if (document.mozCancelFullscreen) document.mozCancelFullscreen();
 }
 
+//Keyboard Shortcuts
 var keydownListener = function (event) {
     switch (event.code) {
         case 'Space':
@@ -107,25 +109,29 @@ var keydownListener = function (event) {
             event.preventDefault();
             scrollSpeed = 1.5;
             break;
-        case 'Digit5':
+        case 'Digit4':
             event.preventDefault();
             scrollSpeed = 2;
-            break;
-        case 'Digit6':
+            break;    
+        case 'Digit5':
             event.preventDefault();
             scrollSpeed = 2.5;
             break;
-        case 'Digit7':
+        case 'Digit6':
             event.preventDefault();
             scrollSpeed = 3;
             break;
-        case 'Digit8':
+        case 'Digit7':
             event.preventDefault();
             scrollSpeed = 3.5;
             break;
-        case 'Digit9':
+        case 'Digit8':
             event.preventDefault();
             scrollSpeed = 4;
+            break;
+        case 'Digit9':
+            event.preventDefault();
+            scrollSpeed = 4.5;
             break;
         case 'Digit0':
             event.preventDefault();
@@ -194,7 +200,7 @@ var keydownListener = function (event) {
             break;
         case 'NumpadAdd':
             event.preventDefault();
-            if (scrollSpeed + 0.25 <= 6) scrollSpeed += 0.25;
+            if (scrollSpeed + 0.25 <= TOP_SPEED) scrollSpeed += 0.25;
             if (!scrollingNow) playScroll();
             break;
         case 'ArrowLeft':
@@ -206,35 +212,12 @@ var keydownListener = function (event) {
     }
 };
 
-function isDoubleClick(type){
-    let currentTime = Date.now();
-    if (currentTime - lastPressed[type] < DOUBLE_CLICK_INTERVAL) {
-        lastPressed[type] = 0;
-        return true;
-    }
-
-    lastPressed[type] = currentTime
-    return false;
-}
-
-//Text edit states
-function notEditable() {
-    document.addEventListener('keydown', keydownListener);
-}
-
-function Editable() {
-    document.getElementById('search-modal');
-    document.removeEventListener('keydown', keydownListener);
-}
-notEditable();
-
-//Keyboard Shortcuts
 var helpCard = document.getElementById("helpCard");
 window.addEventListener('keydown', function (event) {
     if (event.key === 'Tab') {
         helpCard.style.display = "block";
         event.preventDefault();
-    } else if (event.code === 'Pause') {
+    } else if (event.key === 'Pause') {
         if (prompterContent.contentEditable === "true") {
             prompterContent.contentEditable = "false";
             data[currentIndex] = prompterContent.innerHTML;
@@ -246,10 +229,10 @@ window.addEventListener('keydown', function (event) {
         }
         prompterContent.focus();
         event.preventDefault();
-    } else if (event.code === 'PageUp' && prompterContent.contentEditable === "true") {
+    } else if (event.key === 'PageUp' && prompterContent.contentEditable === "true") {
         showColorPicker();
         event.preventDefault();
-    } else if (event.code === 'PageDown' && prompterContent.contentEditable === "true") {
+    } else if (event.key === 'PageDown' && prompterContent.contentEditable === "true") {
         showColorPresets();
         event.preventDefault();
     }
@@ -283,6 +266,29 @@ var wheelListener = function (event) {
     }
 };
 document.addEventListener('wheel', wheelListener);
+
+//Double click function
+function isDoubleClick(type){
+    let currentTime = Date.now();
+    if (currentTime - lastPressed[type] < DOUBLE_CLICK_INTERVAL) {
+        lastPressed[type] = 0;
+        return true;
+    }
+
+    lastPressed[type] = currentTime
+    return false;
+}
+
+//Text edit states
+function notEditable() {
+    document.addEventListener('keydown', keydownListener);
+}
+
+function Editable() {
+    document.getElementById('search-modal');
+    document.removeEventListener('keydown', keydownListener);
+}
+notEditable();
 
 //Colors
 function showColorPicker() {
