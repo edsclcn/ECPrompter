@@ -176,10 +176,16 @@ function renameTab(tab) {
 }
 
 function sendPrompt(tabId, textId) {
-    const text = document.getElementById(`textarea-${tabId}-${textId}`).value;
+    let data = [];
+    for (let i = 1; true; i++){
+        const textarea = document.getElementById(`textarea-${tabId}-${i}`);
+        if (!textarea) break;
+        data.push(textarea.value);
+    }
+
     const title = `${SESSION_ID}-${tabId}`;
-    localStorage.setItem(title, text);
-    textNum[tabId.toString()][1] = window.open(`prompter.html?title=${encodeURIComponent(title)}`, title, 'width=800,height=450');
+    localStorage.setItem(title, JSON.stringify(data));
+    textNum[tabId.toString()][1] = window.open(`prompter.html?title=${encodeURIComponent(title)}&current=${textId-1}`, title, 'width=800,height=450');
     textNum[tabId.toString()][1].focus();
 }
 

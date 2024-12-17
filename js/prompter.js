@@ -1,6 +1,11 @@
+const DOUBLE_CLICK_INTERVAL = 500;
+
 const prompterContainer = document.getElementById("bgPrompter");
 const prompterContent = document.getElementById("prompter-content");
 const title = getUrlParameter('title');
+let data = JSON.parse(localStorage.getItem(title));
+let currentIndex = getUrlParameter('current');
+let lastPressed = [0, 0];
 
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
@@ -18,10 +23,6 @@ window.onload = function () {
 let fontSize = sessionStorage.getItem('fontSize');
 if (fontSize) prompterContent.style.fontSize = fontSize + 'px';
 else prompterContent.style.fontSize = '100px';
-
-//Get data
-let receivedData = "<br>" + localStorage.getItem(title);
-prompterContent.innerHTML = receivedData;
 
 //Scrolling
 prompterContent.style.top = "0px";
@@ -49,6 +50,15 @@ function playScroll() {
 function pauseScroll() {
     cancelAnimationFrame(animationLoop);
     scrollingNow = false;
+}
+
+setText(currentIndex);
+
+function setText(index) {
+    if (scrollingNow) pauseScroll();
+    scrollPosition = 0;
+    prompterContent.style.top = "0px";
+    prompterContent.innerHTML = "<br>" + data[index];
 }
 
 //Initial theme
@@ -187,8 +197,25 @@ var keydownListener = function (event) {
             if (scrollSpeed + 0.25 <= 6) scrollSpeed += 0.25;
             if (!scrollingNow) playScroll();
             break;
+        case 'ArrowLeft':
+            if (isDoubleClick(0) && currentIndex > 0) setText(--currentIndex);
+            break;
+        case 'ArrowRight':
+            if (isDoubleClick(1) && currentIndex < data.length - 1) setText(++currentIndex);
+            break;
     }
 };
+
+function isDoubleClick(type){
+    let currentTime = Date.now();
+    if (currentTime - lastPressed[type] < DOUBLE_CLICK_INTERVAL) {
+        lastPressed[type] = 0;
+        return true;
+    }
+
+    lastPressed[type] = currentTime
+    return false;
+}
 
 //Text edit states
 function notEditable() {
@@ -210,7 +237,8 @@ window.addEventListener('keydown', function (event) {
     } else if (event.code === 'Pause') {
         if (prompterContent.contentEditable === "true") {
             prompterContent.contentEditable = "false";
-            localStorage.setItem(title, prompterContent.innerHTML);
+            data[currentIndex] = prompterContent.innerHTML;
+            localStorage.setItem(title, JSON.stringify(data));
             notEditable();
         } else {
             prompterContent.contentEditable = "true";
