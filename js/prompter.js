@@ -12,7 +12,7 @@ function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(location.search);
-    return results === "null" ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    return results === "null" ? '' : decodeURIComponent(results[1].replace(/\+/g, ' ')); 
 }
 
 window.onload = function () {
@@ -63,7 +63,7 @@ function setText(index) {
     if (scrollingNow) pauseScroll();
     scrollPosition = 0;
     prompterContent.style.top = "0px";
-    prompterContent.innerHTML = "<br>" + data[index];
+    prompterContent.innerHTML = "<br>" + (data? data[index] : 'No content. Close the window.'); 
 }
 
 //Initial theme
