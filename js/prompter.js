@@ -63,7 +63,7 @@ function setText(index) {
     if (scrollingNow) pauseScroll();
     scrollPosition = 0;
     prompterContent.style.top = "0px";
-    prompterContent.innerHTML = "<br>" + (data? data[index] : 'No content. Close the window.'); 
+    prompterContent.innerHTML = data? data[index] : '\nNo content. Close the window.'; 
 }
 
 //Initial theme

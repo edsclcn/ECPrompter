@@ -180,7 +180,7 @@ function sendPrompt(tabId, textId) {
     for (let i = 1; true; i++){
         const textarea = document.getElementById(`textarea-${tabId}-${i}`);
         if (!textarea) break;
-        data.push(textarea.value);
+        data.push("\n" + textarea.value);
     }
 
     const title = `${SESSION_ID}-${tabId}`;
