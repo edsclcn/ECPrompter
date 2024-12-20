@@ -14,13 +14,21 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #121212;
     color: #ffffff;
+    margin: 0;
+    /* padding-bottom: 60px; Reserve space for the fixed footer */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure body takes full height */
+    overflow-x: hidden;
+    scrollbar-color: #555 #1f1f1f;
+    scrollbar-width: thin;
 }
 
 /* Dashboard Layout */
 .dashboard {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    flex-grow: 1; /* Allow content to grow and push footer down */
 }
 
 /* Navbar */
@@ -170,7 +178,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 10px;
-
 }
 
 .textarea-item textarea {
@@ -230,7 +237,6 @@ body {
     margin-right: auto;
 }
 
-
 /* Dark Mode Scrollbars */
 ::-webkit-scrollbar {
     width: 10px;
@@ -250,11 +256,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #777;
-}
-
-body {
-    scrollbar-color: #555 #1f1f1f;
-    scrollbar-width: thin;
 }
 
 .remove-set-btn-wrapper {
@@ -279,6 +280,48 @@ body {
     font-size: 15px;
     cursor: pointer;
     z-index: 2;
+}
+
+/* FOOTER */
+/* Footer styles */
+.footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #444;
+    position: relative;
+    width: 100%;
+}
+
+/* Footer content styles */
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer .social-links {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0 0;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer .social-links li {
+    display: inline-block;
+}
+
+.footer .social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.footer .social-links a:hover {
+    color: #00aced;
 }
 
 @media (max-width: 768px) {
