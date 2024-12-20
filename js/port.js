@@ -48,17 +48,17 @@ function importLineup() {
                     i--;
                     continue;
                 }
+                
                 if (!textarea.value) {
                     textarea.value = value.trim();
                     current++;
                 }
             }
-            importBtn.value = 'Import';
-            importBtn.textContent = 'Import';
         })
         .catch(err => {
             alert(`Failed to import lineup: ${err}`);
-            importBtn.value = 'Import';
+        }).finally(() => {
+            importBtn.textContent = 'Import';
         });
 }
 

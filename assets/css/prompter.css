@@ -174,3 +174,7 @@ th {
     margin: 5px;
     cursor: pointer;
 }
+
+.blackwhite .lyricTitle{
+    color: #ffff00;
+}

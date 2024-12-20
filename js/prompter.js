@@ -12,7 +12,7 @@ function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     var results = regex.exec(location.search);
-    return results === "null" ? '' : decodeURIComponent(results[1].replace(/\+/g, ' ')); 
+    return results === "null" ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 }
 
 window.onload = function () {
@@ -63,7 +63,7 @@ function setText(index) {
     if (scrollingNow) pauseScroll();
     scrollPosition = 0;
     prompterContent.style.top = "0px";
-    prompterContent.innerHTML = data? data[index] : '\nNo content. Close the window.'; 
+    prompterContent.innerHTML = data ? data[index] : '\nNo content. Close the window.';
 }
 
 //Initial theme
@@ -218,6 +218,12 @@ var keydownListener = function (event) {
         case 'ArrowRight':
             if (isDoubleClick(1) && currentIndex < data.length - 1) setText(++currentIndex);
             break;
+        case 'Numpad0':
+            if (prompterContent.getElementsByClassName('lyricTitle').length > 0) break;
+            let text = prompterContent.innerHTML.split('\n');
+            text[1] = `<span class='lyricTitle'>${text[1]}</span>`;
+            prompterContent.innerHTML = text.join('\n');
+            break;
     }
 };
 
@@ -255,8 +261,6 @@ window.addEventListener('keyup', function (event) {
 
 //Scroll Wheel
 var wheelListener = function (event) {
-    event.preventDefault();
-
     if (event.ctrlKey) {
         if (event.deltaY < 0) {
             var newSize = parseInt(window.getComputedStyle(prompterContent).fontSize) + 2;
