@@ -163,7 +163,6 @@ var keydownListener = function (event) {
         case 'F11': case 'KeyF':
             event.preventDefault();
             toggleFullscreen();
-            toggleElementVisibility();
             break;
         case 'Escape':
             event.preventDefault();
