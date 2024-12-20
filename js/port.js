@@ -30,7 +30,7 @@ function exportLineup() {
 
 function importLineup() {
     let importBtn = document.getElementById('import-btn');
-    importBtn.textContent = 'Importing...';
+    importBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
     upload()
         .then(values => {
