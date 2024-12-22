@@ -1,5 +1,6 @@
 const DOUBLE_CLICK_INTERVAL = 500;
 const TOP_SPEED = 6.5;
+const SPEED_CONTROL = 0.1;
 
 const prompterContainer = document.getElementById("bgPrompter");
 const prompterContent = document.getElementById("prompter-content");
@@ -204,12 +205,12 @@ var keydownListener = function (event) {
             break;
         case 'NumpadSubtract':
             event.preventDefault();
-            if (scrollSpeed - 0.25 > 0) scrollSpeed -= 0.25;
+            if (scrollSpeed - SPEED_CONTROL > 0) scrollSpeed -= SPEED_CONTROL;
             else pauseScroll();
             break;
         case 'NumpadAdd':
             event.preventDefault();
-            if (scrollSpeed + 0.25 <= TOP_SPEED) scrollSpeed += 0.25;
+            if (scrollSpeed + SPEED_CONTROL <= TOP_SPEED) scrollSpeed += SPEED_CONTROL;
             if (!scrollingNow) playScroll();
             break;
         case 'ArrowLeft':
