@@ -176,6 +176,47 @@ th {
     cursor: pointer;
 }
 
+/* Text Formatting */
+
 .blackwhite .lyricTitle{
     color: #ffff00;
+}
+
+span.r {
+    color: #ff0000;
+}
+
+span.g {
+    color: #00ff00;
+}
+
+span.b {
+    color: #0000ff;
+}
+
+span.y {
+    color: #ffff00;
+}
+
+span.v {
+    color: #9D00FF;
+}
+
+span.f {
+    color: #ffffff;
+}
+
+span.z {
+    color: #000000;
+}
+
+span.n {
+    font-weight: 400;
+}
+span.i {
+    font-style: italic;
+}
+
+span.u {
+    text-decoration: underline;
 }
