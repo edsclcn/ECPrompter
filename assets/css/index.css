@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Got';
+    src: url('../fonts/GOT.ttf') format('truetype');
+}
+
 /* General Reset */
 * {
     margin: 0;
@@ -7,6 +12,7 @@
 
 #name {
     user-select: none;
+    font-family: 'Got';
 }
 
 /* Body Styling */
@@ -67,13 +73,15 @@ body {
 .tab {
     background-color: #333;
     color: #bbb;
-    padding: 7px 22px 7px 10px;
+    padding: 10px 22px 10px 10px;
     border-radius: 5px;
     cursor: pointer;
     position: relative;
     text-align: center;
     align-items: center;
     user-select: none;
+    font-family: 'Got';
+    font-size: 15px;
 }
 
 .tab span:hover {
@@ -93,7 +101,7 @@ body {
 
 .close-btn {
     position: absolute;
-    top: 4px;
+    top: 7px;
     right: 5px;
     text-align: center;
     font-size: 18px;
@@ -207,6 +215,7 @@ body {
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'Got';
 }
 
 .textarea-item button:first-of-type {
