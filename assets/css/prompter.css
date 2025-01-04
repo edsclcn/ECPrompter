@@ -1,13 +1,13 @@
 @font-face {
     font-family: 'Gara';
-    src: url('../fonts/GARA.ttf') format('truetype');
+    src: url('../fonts/GARA.TTF') format('truetype');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Gara';
-    src: url('../fonts/GARABD.ttf') format('truetype');
+    src: url('../fonts/GARABD.TTF') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
@@ -85,7 +85,7 @@ body {
 }
 
 .lyricsPrompter #prompter-content {
-    font-family: 'Gara';
+    font-family: 'Gara' !important;
     font-weight: 900;
     text-shadow: 0px 2px, 2px 0px, 2px 2px;
     letter-spacing: 2.5px;
