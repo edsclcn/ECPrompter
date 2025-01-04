@@ -1,6 +1,13 @@
 @font-face {
-    font-family: 'LyricsFont';
-    src: url('fonts/dutch.ttf') format('truetype');
+    font-family: 'Gara';
+    src: url('../fonts/GARA.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gara';
+    src: url('../fonts/GARABD.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
@@ -73,13 +80,15 @@ body {
     user-select: none;
     white-space: pre-line;
     word-wrap: break-word;
-    width: 70vw; 
+    width: 70vw;
     max-width: 100vw;
 }
 
 .lyricsPrompter #prompter-content {
-    font-family: 'LyricsFont';
+    font-family: 'Gara';
     font-weight: 900;
+    text-shadow: 0px 2px, 2px 0px, 2px 2px;
+    letter-spacing: 2.5px;
     color: #000;
 }
 
@@ -178,7 +187,7 @@ th {
 
 /* Text Formatting */
 
-.blackwhite .lyricTitle{
+.blackwhite .lyricTitle {
     color: #ffff00;
 }
 
@@ -213,6 +222,7 @@ span.z {
 span.n {
     font-weight: 400;
 }
+
 span.i {
     font-style: italic;
 }
