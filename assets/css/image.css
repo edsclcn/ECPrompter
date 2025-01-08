@@ -1,0 +1,418 @@
+@font-face {
+    font-family: 'Got';
+    src: url('../fonts/GOT.ttf') format('truetype');
+}
+
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#name {
+    user-select: none;
+    font-family: 'Got';
+}
+
+/* Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Dashboard Layout */
+.dashboard {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #1f1f1f;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.navbar-content {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-content h2 {
+    font-size: 1.5rem;
+    color: #fff;
+    margin-right: 20px;
+}
+
+.navbar-content nav {
+    display: flex;
+    align-items: center;
+}
+
+#tabs-list {
+    list-style-type: none;
+    display: flex;
+    gap: 10px;
+}
+
+.tab {
+    background-color: #333;
+    color: #bbb;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-family: 'Got';
+    font-size: 15px;
+}
+
+.tab.active {
+    background-color: #306030;
+    color: #fff;
+}
+
+#add-tab-btn {
+    margin-left: 10px;
+    background-color: transparent;
+    color: transparent;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#button-div {
+    margin-left: 20px;
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.port-button {
+    background-color: #306030;
+    color: white;
+    font-size: 16px;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Main Content */
+.main-content {
+    flex: 0.5; /* Ensures the content takes proportional space */
+    background-color: transparent;
+    border-radius: 12px;
+    margin: auto; /* Centers the container horizontally and vertically */
+    width: 100%;
+    max-width: 1500px;
+    height: 400px; /* Set a fixed height for visibility */
+    display: flex; /* Use flexbox for content alignment */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
+}
+
+
+/* Aesthetic Styling for Inner Elements */
+.main-content h1 {
+    font-size: 2rem;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-align: center;
+    font-family: 'Got', serif;
+}
+
+.main-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #cccccc;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.main-content .highlight {
+    background: linear-gradient(90deg, #306030, #4caf50);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+/* Buttons in Main Content */
+.main-content .button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #306030;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+    font-family: 'Got', serif;
+}
+
+.main-content .button:hover {
+    transform: scale(1.05);
+    background-color: #4caf50;
+}
+
+/* Modern Scrollbar Styling */
+.main-content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.main-content::-webkit-scrollbar-track {
+    background: #333;
+    border-radius: 10px;
+}
+
+.main-content::-webkit-scrollbar-thumb {
+    background: #4caf50;
+    border-radius: 10px;
+}
+
+.main-content::-webkit-scrollbar-thumb:hover {
+    background: #5bc45e;
+}
+
+.container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    gap: 20px;
+    width: 100%; /* Full width of the screen */
+    max-width: 1380px; /* Increased max-width for a wider container */
+    height: 80vh; /* Set a fixed height for the container */
+    background-color: #1F1F1F;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    margin-top: 40px; /* Space for the navbar */
+    margin-bottom: 40px; /* Space for the footer */
+}
+
+
+/* Table Styles */
+.table-container {
+    width: 800px;  /* Increased width */
+    max-width: 800px;  /* Ensure it doesn't exceed this width */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+.table-wrapper {
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    width: 100%;
+}
+
+.dataTables_length {
+    display: none;
+}
+
+
+#imageTable th, #imageTable td {
+    padding: 10px;
+    border: none;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+#imageTable th:first-child,
+#imageTable td:first-child {
+    width: 10%;
+    text-align: center;
+}
+
+#imageTable th:last-child,
+#imageTable td:last-child {
+    width: 10%;
+}
+
+#imageTable th:not(:first-child):not(:last-child),
+#imageTable td:not(:first-child):not(:last-child) {
+    width: auto;
+}
+
+#imageTable th {
+    font-weight: 600;
+}
+
+#imageTable tbody tr:nth-child(even) {
+    background-color: #2a2a2a;
+}
+
+#imageTable tbody tr:hover {
+    background-color: #444;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Preview Styles */
+.preview-container {
+    width: 400px;  /* Fixed width */
+    min-width: 400px;  /* Minimum width to ensure it doesn't shrink too much */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #222;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-height: 100%;
+    margin-left: 20px;
+}
+
+#preview {
+    width: 100%;
+    height: 1000px;
+    border: 1px solid #555;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    position: relative;
+}
+
+#preview img {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+    transition: transform 0.3s ease;
+}
+
+/* File Input Styles */
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0px;
+    width: 100%;
+}
+
+input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-input-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.file-input-label:hover {
+    background-color: #444;
+    transform: translateY(-2px);
+}
+
+.file-input-label:active {
+    background-color: #555;
+    transform: translateY(2px);
+}
+
+/* Button Styles */
+button.preview-btn {
+    padding: 8px 16px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.8rem; /* Smaller font size */
+    font-family: 'Got';
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+}
+
+button.preview-btn:hover {
+    background-color: #666;
+    transform: translateY(-2px);
+}
+
+button.preview-btn:active {
+    background-color: #777;
+    transform: translateY(2px);
+}
+
+
+/* Footer */
+.footer {
+    background-color: #222;
+    color: #fff;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 1px solid #444;
+}
+
+.footer-content p {
+    margin: 0;
+    font-size: 14px;
+}
+
+.footer .social-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.footer .social-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.footer .social-links a:hover {
+    color: #00aced;
+}
