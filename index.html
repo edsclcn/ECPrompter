@@ -6,7 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="assets/css/index.css">
+    <!-- <link rel="stylesheet" href="assets/css/image.css"> -->
     <link rel="icon" type="image/png" href="assets/images/logo.png">
+     <!-- DataTables CSS -->
+     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+     <!-- RowReorder CSS -->
+     <link rel="stylesheet" href="https://cdn.datatables.net/rowreorder/1.3.0/css/rowReorder.dataTables.min.css">
+     <link rel="icon" type="image/png" href="assets/images/logo.png">
 
     <title>EC Prompter</title>
 </head>
@@ -17,7 +23,9 @@
             <div class="navbar-content">
                 <h2 id="name">EC Prompter</h2>
                 <nav>
+                    <!-- <button id="img-btn" title=""style="margin-right: 9px;"><i class="fa-solid fa-image"></i></button> -->
                     <ul id="tabs-list"></ul>
+                   
                     <button id="add-tab-btn" title="Add new tab">+</button>
                     <div id="button-div">
                         <button class="port-button" id="export-btn" onclick="exportLineup()" title="Export tab to Clipboard"><i class="fa-solid fa-download"></i></button>
@@ -39,7 +47,14 @@
             </div>
         </footer>
     </div>
+      <!-- jQuery -->
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <!-- DataTables JS -->
+      <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+      <!-- RowReorder JS -->
+      <script src="https://cdn.datatables.net/rowreorder/1.3.0/js/dataTables.rowReorder.min.js"></script>
     <script src="js/index.js"></script>
+    <script src="js/image.js"></script>
     <script src="js/port.js"></script>
     <script src="js/textformatting.js"></script>
 </body>

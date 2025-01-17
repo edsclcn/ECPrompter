@@ -5,7 +5,7 @@ let tabCount = 0;
 let activeTabs = []; // List of currently open tabs (tracks their IDs)
 let textNum = {};
 
-function addTab() {
+function addTab(tabName = `Tab ${tabCount + 1}`, isImageTab = false) {
     if (activeTabs.length >= 10) {
         alert("Maximum 10 tabs allowed.");
         return 0;
@@ -13,54 +13,97 @@ function addTab() {
 
     tabCount++;
     activeTabs.push(tabCount);
-    textNum[tabCount.toString()] = [0, null, null]; //Area count, window, active text area
+    textNum[tabCount.toString()] = [0, null, null]; // Area count, window, active text area
 
     const tab = document.createElement('li');
     tab.classList.add('tab');
-
-    tab.textContent = `Tab ${tabCount}`;
     tab.dataset.tabId = tabCount;
 
-    const closeButton = document.createElement('span');
-    closeButton.classList.add('close-btn');
-    closeButton.textContent = '×';
-    closeButton.onclick = function (event) {
-        event.stopPropagation();
-        handleTabClose(tab);
-    };
+    if (isImageTab) {
+        tab.innerHTML = '<i class="fa-solid fa-image"></i>';  // Add the image icon alongside "IMG" text
+        tab.classList.add('image-tab');
+    } else {
+        tab.textContent = tabName;
 
-    tab.appendChild(closeButton);
-    tab.ondblclick = () => renameTab(tab);
+        // Create the close button for other tabs
+        const closeButton = document.createElement('span');
+        closeButton.classList.add('close-btn');
+        closeButton.textContent = '×';
+        closeButton.onclick = function (event) {
+            event.stopPropagation();
+            handleTabClose(tab);
+        };
+
+        tab.appendChild(closeButton);
+    }
+
+    // Disable rename function for the image tab
+    tab.ondblclick = isImageTab ? null : () => renameTab(tab);
 
     document.getElementById('tabs-list').appendChild(tab);
-    addTabContent(tabCount);
-    showTabContent(tabCount);
+    addTabContent(tabCount, isImageTab);
+    if (tabName !== "Image") {
+        showTabContent(tabCount);
+    }
     return tabCount;
 }
 
-function addTabContent(tabId) {
+function addTabContent(tabId, isImageTab) {
     const tabContent = document.getElementById('tab-content');
     const content = document.createElement('div');
     content.classList.add('tab-pane');
     content.id = `tab-${tabId}`;
 
-    const container = document.createElement('div');
-    container.classList.add('textareas-container');
+    if (isImageTab) {
+        content.innerHTML = `
+            <main class="main-content">
+                <div class="main-image">
+                    <div class="container">
+                        <div class="table-container">
+                            <div class="header">
+                                <div class="file-input-wrapper">
+                                    <input type="file" id="imageInput" multiple accept="image/*">
+                                    <label for="imageInput" class="file-input-label">Choose Files</label>
+                                </div>
+                            </div>
+                            <table id="imageTable" class="display compact">
+                                <thead>
+                                    <tr>
+                                        <th>Move</th>
+                                        <th>File Name</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="imageTableBody"></tbody>
+                            </table>
+                        </div>
+                        <div class="preview-container">
+                            <div id="preview">
+                                <p>No image selected</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </main>`;
+    } else {
+        const container = document.createElement('div');
+        container.classList.add('textareas-container');
 
-    createTextareasRow(container, tabId);
-
-    const addSetButton = document.createElement('button');
-    addSetButton.classList.add('add-set-btn');
-    addSetButton.id = `add-set-${tabId}`;
-    addSetButton.title = "Add new set";
-
-    addSetButton.innerHTML = '<i class="fa-solid fa-boxes-stacked"></i> +';
-    addSetButton.onclick = function () {
         createTextareasRow(container, tabId);
-    };
 
-    content.appendChild(container);
-    content.appendChild(addSetButton);
+        const addSetButton = document.createElement('button');
+        addSetButton.classList.add('add-set-btn');
+        addSetButton.id = `add-set-${tabId}`;
+        addSetButton.title = "Add new set";
+
+        addSetButton.innerHTML = '<i class="fa-solid fa-boxes-stacked"></i> +';
+        addSetButton.onclick = function () {
+            createTextareasRow(container, tabId);
+        };
+
+        content.appendChild(container);
+        content.appendChild(addSetButton);
+    }
     tabContent.appendChild(content);
 }
 
@@ -94,7 +137,6 @@ function createTextareasRow(container, tabId) {
             textarea.style.border = '2px solid red';
             textNum[tabId.toString()][2] = textarea;
 
-            //get button, get parent element (buttonContainer), get parent element (textAreaItem), get textarea in element, get the first index element, get the id of the element, split string with hyphen, get the third index (the id) 
             const id = promptButton.parentElement.parentElement.getElementsByTagName("textarea")[0].id.split("-")[2];
 
             sendPrompt(tabId, parseInt(id));
@@ -177,7 +219,7 @@ function renameTab(tab) {
 
 function sendPrompt(tabId, textId) {
     let data = [];
-    for (let i = 1; true; i++){
+    for (let i = 1; true; i++) {
         const textarea = document.getElementById(`textarea-${tabId}-${i}`);
         if (!textarea) break;
         data.push("\n" + formatText(textarea.value));
@@ -189,19 +231,24 @@ function sendPrompt(tabId, textId) {
     textNum[tabId.toString()][1].focus();
 }
 
-document.getElementById('add-tab-btn').addEventListener('click', addTab);
+document.getElementById('add-tab-btn').addEventListener('click', () => addTab());
 document.getElementById('tabs-list').addEventListener('click', (e) => {
     if (e.target.classList.contains('tab')) {
         showTabContent(parseInt(e.target.dataset.tabId));
     }
 });
 
-window.onload = () => addTab();
+// Set Tab 1 as default on page load
+window.onload = () => {
+    const imageTabId = addTab("Image", true);  // Add Image tab first
+    const tab1Id = addTab("Tab 1");             // Add Tab 1
+    showTabContent(tab1Id);                     // Show Tab
+    // 1 content as default
+};
 
 window.addEventListener('beforeunload', function (event) {
     for (let i = 1; i <= tabCount; i++) {
         this.localStorage.removeItem(`${SESSION_ID}-${i}`);
     }
+});
 
-    //event.preventDefault(); event.returnValue = ''; 
-}); 

@@ -120,6 +120,15 @@ body {
     cursor: pointer;
 }
 
+.tab.image-tab {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 15px;
+}
+
+
 #button-div {
     user-select: none;
     margin-left: 20px;
@@ -145,6 +154,19 @@ body {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
+    
+}
+
+.main-image {
+    flex: 1;
+    /* padding: 20px; */
+    width: 100%;
+    max-width: 1500px;
+    overflow-y: auto;
+    margin: auto; /* Centers the container horizontally and vertically */
+    display: flex; /* Use flexbox for content alignment */
+    justify-content: center; /* Center content horizontally */
+    align-items: center; /* Center content vertically */
 }
 
 .header {
@@ -164,6 +186,7 @@ body {
     border-radius: 8px;
     margin-top: 20px;
 }
+
 
 /* Textareas Container */
 .textareas-container {
@@ -289,6 +312,198 @@ body {
     font-size: 15px;
     cursor: pointer;
     z-index: 2;
+}
+
+/* IMAGE */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    width: 100%; 
+    max-width: 1380px; 
+    height: 80vh; 
+    border-radius: 15px;
+    box-sizing: border-box;
+}
+
+/* Table Styles */
+.table-container {
+    width: 1000px;  /* Increased width */
+    max-width: 1000px;  /* Ensure it doesn't exceed this width */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+
+.table-wrapper {
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    width: 100%;
+}
+
+.dataTables_length {
+    display: none;
+}
+
+
+#imageTable th, #imageTable td {
+    padding: 10px;
+    border: none;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+#imageTable th:first-child,
+#imageTable td:first-child {
+    width: 10%;
+    text-align: center;
+}
+
+#imageTable th:last-child,
+#imageTable td:last-child {
+    width: 10%;
+}
+
+#imageTable th:not(:first-child):not(:last-child),
+#imageTable td:not(:first-child):not(:last-child) {
+    width: auto;
+}
+
+#imageTable th {
+    font-weight: 600;
+}
+
+#imageTable tbody tr:nth-child(even) {
+    background-color: #2a2a2a;
+}
+
+#imageTable tbody tr:hover {
+    background-color: #444;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* Preview Styles */
+.preview-container {
+    width: 400px;  /* Fixed width */
+    min-width: 400px;  /* Minimum width to ensure it doesn't shrink too much */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #222;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    max-height: 100%;
+    margin-left: 20px;
+}
+
+#preview {
+    width: 100%;
+    height: 1000px;
+    border: 1px solid #555;
+    background-color: #222;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;
+    position: relative;
+}
+
+#preview img {
+    width: 100%;
+    height: auto;
+    position: relative;
+    top: 0;
+    transition: transform 0.3s ease;
+}
+
+/* File Input Styles */
+.file-input-wrapper {
+    position: relative;
+    display: inline-block;
+    margin: 10px 0px;
+    width: 100%;
+}
+
+input[type="file"] {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-input-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.file-input-label:hover {
+    background-color: #444;
+    transform: translateY(-2px);
+}
+
+.file-input-label:active {
+    background-color: #555;
+    transform: translateY(2px);
+}
+
+/* Button Styles */
+button.preview-btn {
+    padding: 8px 16px;
+    background-color: #555;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.8rem; /* Smaller font size */
+    font-family: 'Got';
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+}
+
+button.preview-btn:hover {
+    background-color: #666;
+    transform: translateY(-2px);
+}
+
+button.preview-btn:active {
+    background-color: #777;
+    transform: translateY(2px);
 }
 
 /* FOOTER */
