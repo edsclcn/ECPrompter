@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Gara';
     src: url('../fonts/GARA.TTF') format('truetype');
-    font-weight: 600;
+    font-weight: normal;
     font-style: normal;
 }
 
@@ -87,7 +87,6 @@ body {
 .lyricsPrompter #prompter-content {
     font-family: 'Gara' !important;
     font-weight: 900;
-    text-shadow: 0px 2px, 2px 0px, 2px 2px;
     letter-spacing: 2.5px;
     color: #000;
 }

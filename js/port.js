@@ -58,7 +58,7 @@ function importLineup() {
         .catch(err => {
             alert(`Failed to import lineup: ${err}`);
         }).finally(() => {
-            importBtn.textContent = 'Import';
+            importBtn.innerHTML = '<i class="fa-solid fa-upload"></i>';
         });
 }
 
