@@ -15,6 +15,8 @@ function exportLineup() {
         return;
     }
 
+    const now = new Date();
+
     let data = Array.from(textareas)
         .map(textarea => textarea.value.trim())
         .filter(value => value)
@@ -22,7 +24,7 @@ function exportLineup() {
 
     if (data) {
         download(
-            "ECPrompter-" + [new Date().getMonth() + 1, new Date().getDate(), new Date().getFullYear(), new Date().getHours(), new Date().getMinutes()].join('-'),
+            now.toISOString().slice(0, 10).replace(/-/g, '')  + "_" + document.getElementById('tabs-list').getElementsByClassName('active')[0].firstChild.textContent + '_line_up.txt',
             data
         )
     } else alert('Lineup is empty! Export was unsuccessful.');
@@ -108,4 +110,29 @@ function upload() {
 
         input.click();
     });
+}
+
+function exportCSV() {
+    let currentTab = document.getElementsByClassName('active')[0];
+
+    let dataString = "";
+    for (let i = 1; true; i++){
+        const textarea = document.getElementById(`textarea-${currentTab.dataset.tabId}-${i}`);
+        if (!textarea) break;
+        let title = textarea.value.split("\n")[0].replace(/[^a-zA-Z0-9 ().-]/g, '');
+        if (title) dataString += title + "\n";
+    }
+
+    const now = new Date();
+    const blob = new Blob([dataString], { type: 'text/csv' });
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = now.toISOString().slice(0, 10).replace(/-/g, '')  + "_" + currentTab.firstChild.textContent + '_line_up.csv';
+    document.body.appendChild(a);
+    a.click();
+
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }

@@ -169,13 +169,13 @@ var keydownListener = function (event) {
             event.preventDefault();
             exitFullscreen();
             break;
-        case 'BracketLeft':
+        case 'BracketLeft': case 'F8':
             event.preventDefault();
             var newSize = parseInt(window.getComputedStyle(prompterContent).fontSize) - 2;
             prompterContent.style.fontSize = newSize + 'px';
             sessionStorage.setItem('fontSize', newSize);
             break;
-        case 'BracketRight':
+        case 'BracketRight': case 'F9':
             event.preventDefault();
             var newSize = parseInt(window.getComputedStyle(prompterContent).fontSize) + 2;
             prompterContent.style.fontSize = newSize + 'px';
@@ -224,6 +224,8 @@ var keydownListener = function (event) {
             let text = prompterContent.innerHTML.split('\n');
             text[1] = `<span class='lyricTitle'>${text[1]}</span>`;
             prompterContent.innerHTML = text.join('\n');
+            data[currentIndex] = prompterContent.innerHTML;
+            localStorage.setItem(title, JSON.stringify(data));
             break;
     }
 };
