@@ -24,7 +24,7 @@ window.onload = function () {
 //Font size
 let fontSize = sessionStorage.getItem('fontSize');
 if (fontSize) prompterContent.style.fontSize = fontSize + 'px';
-else prompterContent.style.fontSize = '100px';
+else prompterContent.style.fontSize = '138px';
 
 //Prompter width
 let prompterWidth = sessionStorage.getItem('prompterWidth');
